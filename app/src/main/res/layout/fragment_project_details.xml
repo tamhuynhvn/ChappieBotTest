@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable name="isLoading" type="boolean"/>
+        <variable name="detailViewModel" type="test.tamhuynh.com.chappiebot.viewModel.DetailViewModel"/>
+    </data>
+
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <TextView
+                android:id="@+id/loading_project"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="@string/loading_project"
+                android:textAlignment="center"
+                app:visibleGone="@{isLoading}"/>
+        <ScrollView android:layout_width="match_parent" android:layout_height="match_parent">
+            <LinearLayout
+                    android:layout_marginStart="@dimen/item_horizontal_margin"
+                    android:layout_marginEnd="@dimen/item_horizontal_margin"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:padding="5dp"
+                    android:paddingTop="@dimen/activity_vertical_margin"
+                    android:orientation="vertical"
+                    app:visibleGone="@{!isLoading}">
+
+
+                <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="name"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/project_header1"
+                        android:text="@{detailViewModel.item.title}"
+                        android:textAlignment="center"
+                        android:paddingBottom="5dp"/>
+
+                <TextView
+                        android:id="@+id/project_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/project_description"
+                        android:textSize="@dimen/project_header2"
+                        android:text="@{detailViewModel.item.description}"/>
+                <TextView
+                        android:id="@+id/container_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/project_description"
+                        android:textSize="@dimen/project_header2"
+                        app:textContain="@{detailViewModel.item.sections}"/>
+
+            </LinearLayout>
+        </ScrollView>
+    </FrameLayout>
+</layout>
